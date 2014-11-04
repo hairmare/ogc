@@ -22,10 +22,15 @@ Docker instance for additional isolation. The UI is based on the API.
 
 ## Needed Units
 
-* mongodb.service (persistance for api.service)
-* api.service (api for storing state)
-* docker.service (for running nested docker)
-* frontend.service (web site)
-* worker.unit (template for running instade nested docker)
-* router.service (http routing for api and frontend)
-* revproxy.service (front ssl proxy)
+* [X] mongodb.service (persistance for api.service)
+* [ ] ogc-api.service (api for storing state)
+* [X] nested-docker.service (for running nested docker)
+* [ ] frontend.service (web site)
+* [ ] ogc-worker.unit (template for running instade nested docker)
+* [ ] router.service (http routing for api and frontend)
+* [ ] revproxy.service (front ssl proxy)
+* [ ] nginx.service (hosting for static data like build artefacts)
+
+## TODOs
+
+* [ ] replace nested-docker.service with one based on gentoo

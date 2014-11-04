@@ -4,8 +4,10 @@ After=docker.service
 
 [Service]
 TimeoutStartSec=10
+TimeoutStopSec=10
 ExecStartPre=-/usr/bin/docker kill mongodb
 ExecStartPre=-/usr/bin/docker rm mongodb
-#ExecStartPre=/usr/bin/docker pull hairmare/mongodb
-ExecStart=/usr/bin/docker run hairmare/mongodb
+ExecStartPre=/usr/bin/docker pull hairmare/mongodb
+ExecStartPre=-/usr/bin/docker run --name 'mongodb-data' hairmare/mongodb echo "Creating data volumes"
+ExecStart=/usr/bin/docker run --name 'mongodb' --volumes-from mongodb-data hairmare/mongodb
 ExecStop=/usr/bin/docker stop mongodb
