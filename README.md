@@ -1,6 +1,6 @@
 # Online GLSA Checker
 
-Runs in the clound and check if your docker images are affected by any GLSAs.
+Runs in the clound and checks if your docker images are affected by GLSAs.
 
 This is a CoreOS based SaaS platform.
 
@@ -30,6 +30,7 @@ Docker instance for additional isolation. The UI is based on the API.
 * [ ] router.service (http routing for api and frontend)
 * [ ] revproxy.service (front ssl proxy)
 * [ ] nginx.service (hosting for static data like build artefacts)
+* [ ] proxy.service (outgoing caching webproxy (for distfiles))
 
 ## TODOs
 
