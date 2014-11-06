@@ -1,0 +1,11 @@
+[Unit]
+Description=Online GLSA Check SSL Proxy Service
+After=ogc-proxy-main.service
+
+[Service]
+TimeoutStartSec=10
+ExecStartPre=-/usr/bin/docker kill ogc-proxy-ssl
+ExecStartPre=-/usr/bin/docker rm ogc-proxy-ssl
+ExecStartPre=/usr/bin/docker pull hairmare/ogc-proxy:latest
+ExecStart=/usr/bin/docker run --name ogc-proxy-ssl --link ogc-proxy-main:main -p 443:443 hairmare/ogc-proxy ssl
+ExecStop=/usr/bin/docker stop ogc-proxy-ssl

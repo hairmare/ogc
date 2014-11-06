@@ -1,0 +1,12 @@
+[Unit]
+Description=Online GLSA Check Worker Service
+After=ogc-api.service
+After=nested-docker.service
+
+[Service]
+TimeoutStartSec=10
+ExecStartPre=-/usr/bin/docker kill ogc-worker
+ExecStartPre=-/usr/bin/docker rm ogc-worker
+ExecStartPre=/usr/bin/docker pull hairmare/ogc-worker:latest
+ExecStart=/usr/bin/docker run --name ogc-worker --link ogc-api:api --link ogc-api:zmq --link docker:docker hairmare/ogc-worker work all
+ExecStop=/usr/bin/docker stop ogc-worker
