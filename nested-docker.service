@@ -8,6 +8,7 @@ TimeoutStartSec=10
 ExecStartPre=-/usr/bin/docker kill docker
 ExecStartPre=-/usr/bin/docker rm docker
 ExecStartPre=/usr/bin/docker pull hairmare/docker:latest
-ExecStartPre=-/usr/bin/docker run --name docker-data -v /var/lib/docker hairmare/docker echo "Volume created"
+ExecStartPre=/usr/bin/docker pull busybox:latest
+ExecStartPre=-/usr/bin/docker run --name docker-data -v /var/lib/docker busybox echo "Volume created"
 ExecStart=/usr/bin/docker run --name docker --privileged -e PORT=4444 -e 'DOCKER_DAEMON_ARGS=-H tcp://0.0.0.0:4444' -P hairmare/docker
 ExecStop=/usr/bin/docker stop docker
