@@ -26,7 +26,8 @@ updated in situ.
 * [ ] replace nested-docker.service with one based on gentoo
 * [ ] switch to using emerge @security instead of installing glsa-check
 * [ ] split ogc-worker into a worker for each type of work
-* [ ] cleanup logging everywhere (see ogc-api for how it should behave)
+* [X] cleanup logging everywhere (see ogc-api for how it should behave)
 * [ ] clean error handling with automatic recovery where possible
 * [ ] split api service into internal and external service (removes some rw routes externally)
 * [ ] add permissions and auth to external api
+* [ ] make mongodb ha (1 master, 2 secondaries and  1 arbiter per additional machine if the cluster grows, add sidekick units for managing the replica set)
