@@ -1,0 +1,19 @@
+[Unit]
+
+Description=OGC Storage Web Server
+After=ogc-storage-data.service
+
+[Service]
+TimeoutStartSec=5
+TimeoutStopSec=5
+ExecStartPre=-/usr/bin/docker kill ogc-storage-web
+ExecStartPre=-/usr/bin/docker rm ogc-storage-web
+ExecStart=/usr/bin/docker run \
+          --name 'ogc-storage-web' \
+          --volumes-from ogc-storage-data \
+          -e 'GUI_DIR=/var/lib/ogc/dist' \
+          hairmare/ogc-gui serve
+ExecStop=/usr/bin/docker stop ogc-storage-web
+
+[X-Fleet]
+MachineOf=ogc-storage-data@%i.service

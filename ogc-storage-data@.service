@@ -1,0 +1,11 @@
+[Unit]
+Description=OGC Storage Data Service
+After=ogc-startup-storage.service
+
+[Service]
+Type=oneshot
+ExecStartPre=-/usr/bin/docker run --name 'ogc-storage-data' -v /var/lib/ogc/dist busybox echo "Creating data volumes"
+ExecStop=/usr/bin/echo "Created storage volume"
+
+[X-Fleet]
+MachineMetadata=ogc=storage

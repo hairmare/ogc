@@ -1,0 +1,18 @@
+[Unit]
+
+Description=OGC Storage Rsync Service
+After=ogc-storage-data.service
+
+[Service]
+TimeoutStartSec=10
+TimeoutStopSec=10
+ExecStartPre=-/usr/bin/docker kill ogc-storage
+ExecStartPre=-/usr/bin/docker rm ogc-storage
+ExecStart=/usr/bin/docker run \
+          --name 'ogc-storage' \
+          --volumes-from ogc-storage-data \
+          hairmare/ogc-storage --daemon
+ExecStop=/usr/bin/docker stop ogc-storage
+
+[X-Fleet]
+MachineOf=ogc-storage-data@%i.service
