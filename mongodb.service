@@ -1,14 +1,16 @@
 [Unit]
 Description=MongoDB Service
-After=docker.service
+After=ogc-start-admin.service
 
 [Service]
 TimeoutStartSec=10
 TimeoutStopSec=10
 ExecStartPre=-/usr/bin/docker kill mongodb
 ExecStartPre=-/usr/bin/docker rm mongodb
-ExecStartPre=/usr/bin/docker pull hairmare/mongodb:latest
-ExecStartPre=/usr/bin/docker pull busybox:latest
 ExecStartPre=-/usr/bin/docker run --name 'mongodb-data' -v /var/lib/mongodb busybox echo "Creating data volumes"
 ExecStart=/usr/bin/docker run --name 'mongodb' --volumes-from mongodb-data hairmare/mongodb
 ExecStop=/usr/bin/docker stop mongodb
+
+[X-Fleet]
+MachineMetadata=ogc=admin
+Conflicts=mongodb@%i.service

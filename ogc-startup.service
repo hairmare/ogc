@@ -1,0 +1,12 @@
+[Unit]
+Description=Online GLSA Check Global Startup Service
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker pull busybox:latest
+ExecStart=/usr/bin/docker pull hairmare/gentoo:latest
+ExecStart=/usr/bin/docker pull hairmare/node:latest
+
+[X-Fleet]
+Global=true

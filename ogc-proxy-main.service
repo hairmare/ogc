@@ -1,12 +1,15 @@
 [Unit]
-Description=Online GLSA Check Main Proxy Service
-After=ogc-api.service
+Description=Online GLSA Checker Main Proxy Service
+After=ogc-startup-gui.service
 After=ogc-gui.service
 
 [Service]
-TimeoutStartSec=10
+TimeoutStartSec=5
 ExecStartPre=-/usr/bin/docker kill ogc-proxy-main
 ExecStartPre=-/usr/bin/docker rm ogc-proxy-main
-ExecStartPre=/usr/bin/docker pull hairmare/ogc-proxy:latest
 ExecStart=/usr/bin/docker run --name ogc-proxy-main --link ogc-api:api --link ogc-gui:gui -p 80:80 hairmare/ogc-proxy main
 ExecStop=/usr/bin/docker stop ogc-proxy-main
+
+[X-Fleet]
+MachineMetadata=ogc=gui
+Conflicts=ogc-proxy-main@%i.service

@@ -1,0 +1,11 @@
+[Unit]
+Description=Online GLSA Check GUI Startup Service
+After=ogc-startup.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker pull hairmare/ogc-gui:latest
+ExecStart=/usr/bin/docker pull hairmare/ogc-proxy:latest
+
+[X-Fleet]
+MachineMetadata=ogc=gui

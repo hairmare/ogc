@@ -1,0 +1,11 @@
+[Unit]
+Description=Online GLSA Check Worker Startup Service
+After=ogc-startup.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker pull hairmare/ogc-worker:latest
+ExecStart=/usr/bin/docker pull hairmare/docker:latest
+
+[X-Fleet]
+MachineMetadata=ogc=worker
