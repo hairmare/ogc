@@ -1,13 +1,13 @@
 [Unit]
-
 Description=OGC Storage Web Server
-After=ogc-storage-data.service
 
 [Service]
-TimeoutStartSec=5
+TimeoutStopSec=5
 TimeoutStopSec=5
 ExecStartPre=-/usr/bin/docker kill ogc-storage-web
 ExecStartPre=-/usr/bin/docker rm ogc-storage-web
+ExecStartPre=/usr/bin/docker pull hairmare/ogc-gui:latest
+ExecStartPre=-/usr/bin/docker run --name 'ogc-storage-data' -v /var/lib/ogc/dist busybox echo "Creating data volumes"
 ExecStart=/usr/bin/docker run \
           --name 'ogc-storage-web' \
           --volumes-from ogc-storage-data \
@@ -16,4 +16,4 @@ ExecStart=/usr/bin/docker run \
 ExecStop=/usr/bin/docker stop ogc-storage-web
 
 [X-Fleet]
-MachineOf=ogc-storage-data@%i.service
+MachineOf=ogc-storage@%i.service

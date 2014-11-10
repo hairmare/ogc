@@ -1,11 +1,11 @@
 [Unit]
 Description=Online GLSA Check GUI Service
-After=ogc-startup-gui.service
 
 [Service]
 TimeoutStartSec=10
 ExecStartPre=-/usr/bin/docker kill ogc-gui
 ExecStartPre=-/usr/bin/docker rm ogc-gui
+ExecStartPre=/usr/bin/docker pull hairmare/ogc-gui:latest
 ExecStart=/usr/bin/docker run --name ogc-gui --link ogc-api:api hairmare/ogc-gui serve
 ExecStop=/usr/bin/docker stop ogc-gui
 

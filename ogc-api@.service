@@ -1,14 +1,17 @@
 [Unit]
 Description=Online GLSA Check API Service
-After=mongodb.service
+After=ogc-mongodb.service
 
 [Service]
-TimeoutStartSec=10
+TimeoutStartSec=5
+Restart=on-failure
 ExecStartPre=-/usr/bin/docker kill ogc-api
 ExecStartPre=-/usr/bin/docker rm ogc-api
+ExecStartPre=/usr/bin/docker pull hairmare/ogc-api:latest
 ExecStart=/usr/bin/docker run --name ogc-api --link mongodb:mongodb hairmare/ogc-api serve
 ExecStop=/usr/bin/docker stop ogc-api
 
 [X-Fleet]
 MachineMetadata=ogc=admin
+MachineOf=ogc-mongodb@%i.service
 Conflicts=ogc-api@%i.service

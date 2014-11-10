@@ -1,0 +1,16 @@
+[Unit]
+Description=Online GLSA Checker MongoDB Service
+
+[Service]
+TimeoutStartSec=10
+TimeoutStopSec=10
+ExecStartPre=-/usr/bin/docker kill ogc-mongodb
+ExecStartPre=-/usr/bin/docker rm ogc-mongodb
+ExecStartPre=/usr/bin/docker pull hairmare/mongodb:latest
+ExecStartPre=-/usr/bin/docker run --name ogc-mongodb-data -v /var/lib/mongodb busybox echo "Creating data volumes"
+ExecStart=/usr/bin/docker run --name ogc-mongodb --volumes-from ogc-mongodb-data hairmare/mongodb
+ExecStop=/usr/bin/docker stop mongodb
+
+[X-Fleet]
+MachineMetadata=ogc=admin
+Conflicts=ogc-mongodb@%i.service
