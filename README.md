@@ -21,6 +21,16 @@ The resultings artefct are then published on the web for later use. They
 consist of a report containing information on the run as well as a portage
 dist files overlay repository.
 
+## Install
+
+````
+sh build.sh
+git clone https://github.com/coreos/coreos-vagrant.git
+cp user-data coreos-vagrant
+cd coreos-vagrant
+vagrant up
+````
+
 ## Adding an image
 
 Add a new image to the system.
@@ -41,7 +51,7 @@ or via gui: https://example.com/#image/about?id=hairmare%2Fnode
 * [X] ogc-worker.unit (worker that interacts with the api and docker)
 * [X] ogc-proxy-main.service (http routing for api and frontend)
 * [X] ogc-proxy-ssl.service (front ssl proxy)
-* [ ] ogc-dist.service (hosting for static data like build artefacts)
+* [X] ogc-storage.service (hosting for static data like build artefacts)
 * [ ] package-cache.service (outgoing caching webproxy (for distfiles))
 * [ ] elasticsearch.service (for search)
 
@@ -58,3 +68,4 @@ or via gui: https://example.com/#image/about?id=hairmare%2Fnode
 * [ ] implenent es as per http://stackoverflow.com/questions/23846971/how-to-use-elasticsearch-with-mongodb)
 * [ ] add ambassadors where needed (between api and mongodb for instance, maybe also between proxies and backends, or just use docker/libswarm)
 * [ ] add ``USER`` directive in ogc-* services
+* [ ] implement using of storage service in workers
