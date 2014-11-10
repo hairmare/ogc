@@ -11,5 +11,5 @@ ExecStart=/usr/bin/docker run --name ogc-proxy-ssl --link ogc-proxy-main:main -p
 ExecStop=/usr/bin/docker stop ogc-proxy-ssl
 
 [X-Fleet]
-MachineMetadata=ogc=gui
+MachineMetadata=ogc_gui=true
 Conflicts=ogc-proxy-ssl@%i.service

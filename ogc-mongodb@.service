@@ -12,5 +12,5 @@ ExecStart=/usr/bin/docker run --name ogc-mongodb --volumes-from ogc-mongodb-data
 ExecStop=/usr/bin/docker stop mongodb
 
 [X-Fleet]
-MachineMetadata=ogc=admin
+MachineMetadata=ogc_admin=true
 Conflicts=ogc-mongodb@%i.service

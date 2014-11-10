@@ -12,5 +12,5 @@ ExecStart=/usr/bin/docker run --name docker --privileged -e PORT=4444 -e 'DOCKER
 ExecStop=/usr/bin/docker stop docker
 
 [X-Fleet]
-MachineMetadata=ogc=worker
+MachineMetadata=ogc_worker=true
 Conflicts=nested-docker@%1.service

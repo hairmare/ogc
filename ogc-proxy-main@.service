@@ -11,5 +11,5 @@ ExecStart=/usr/bin/docker run --name ogc-proxy-main --link ogc-api:api --link og
 ExecStop=/usr/bin/docker stop ogc-proxy-main
 
 [X-Fleet]
-MachineMetadata=ogc=gui
+MachineMetadata=ogc_gui=true
 Conflicts=ogc-proxy-main@%i.service

@@ -10,5 +10,5 @@ ExecStart=/usr/bin/docker run --name ogc-gui --link ogc-api:api hairmare/ogc-gui
 ExecStop=/usr/bin/docker stop ogc-gui
 
 [X-Fleet]
-MachineMetadata=ogc=gui
+MachineMetadata=ogc_gui=true
 Conflicts=ogc-gui@%i.service

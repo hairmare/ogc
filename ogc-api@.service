@@ -12,6 +12,6 @@ ExecStart=/usr/bin/docker run --name ogc-api --link mongodb:mongodb hairmare/ogc
 ExecStop=/usr/bin/docker stop ogc-api
 
 [X-Fleet]
-MachineMetadata=ogc=admin
+MachineMetadata=ogc_admin=true
 MachineOf=ogc-mongodb@%i.service
 Conflicts=ogc-api@%i.service
