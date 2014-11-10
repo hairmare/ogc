@@ -10,6 +10,7 @@ coreos:
     peer-addr: $public_ipv4:7001
   fleet:
     public-ip: $public_ipv4
+    metadata: 'ogc_storage=true,ogc_worker=true,ogc_admin=true,ogc_frontend=true'
   units:
     - name: etcd.service
       command: start
